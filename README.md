@@ -1,54 +1,49 @@
-CPU Scheduling Algorithms Simulator in C
-📌 Project Overview
+# CPU Scheduling Algorithms Simulator in C
 
-This project is a menu-driven CPU Scheduling Simulator implemented in C, designed to demonstrate and compare fundamental CPU scheduling algorithms used in Operating Systems.
+## 📌 Project Overview
+
+This project is a **menu-driven CPU Scheduling Simulator** implemented in **C**, designed to demonstrate and compare fundamental **CPU scheduling algorithms** used in Operating Systems.
 
 The simulator allows users to input process details and execute multiple scheduling strategies while computing key performance metrics such as:
 
-Waiting Time (WT)
-
-Turnaround Time (TAT)
-
-Completion Time (CT)
-
-Average Waiting Time
-
-Average Turnaround Time
+- Waiting Time (WT)
+- Turnaround Time (TAT)
+- Completion Time (CT)
+- Average Waiting Time
+- Average Turnaround Time
 
 This project is suitable for:
+- Operating Systems laboratory
+- GATE CS preparation
+- Academic projects
+- Resume and interview demonstrations
 
-Operating Systems laboratory
+---
 
-GATE CS preparation
+## ⚙️ Features
 
-Academic projects
+- Supports multiple scheduling algorithms  
+- Handles arrival time, burst time, and priority  
+- Computes process-wise and average performance metrics  
+- Modular and well-structured C code  
+- Menu-driven user interaction  
 
-Resume and interview demonstrations
+---
 
-⚙️ Features
+## 🧩 Implemented Scheduling Algorithms
 
-Supports multiple scheduling algorithms
+- First Come First Serve (FCFS)
+- Shortest Job First (SJF – Non-Preemptive)
+- Priority Scheduling (Non-Preemptive)
+- Round Robin (Preemptive)
 
-Handles arrival time, burst time, and priority
+---
 
-Computes process-wise and average performance metrics
+## 🏗️ Program Structure
 
-Modular and well-structured C code
+### Data Structure Used
 
-Menu-driven user interaction
-
-🧩 Implemented Scheduling Algorithms
-
-First Come First Serve (FCFS)
-
-Shortest Job First (SJF – Non-Preemptive)
-
-Priority Scheduling (Non-Preemptive)
-
-Round Robin (Preemptive)
-
-🏗️ Program Structure
-Data Structure Used
+```c
 typedef struct {
     int pid;
     int arrival;
@@ -61,180 +56,121 @@ typedef struct {
 } Process;
 
 
-Each process stores all attributes required for scheduling and performance evaluation.
 
-📥 Input Parameters
 
-For each process:
+## 📥 Input Parameters
 
-Arrival Time (AT) – Time when the process enters the ready queue
+For each process, the following inputs are required:
 
-Burst Time (BT) – CPU time required by the process
+- **Arrival Time (AT)** – Time at which the process enters the ready queue  
+- **Burst Time (BT)** – Total CPU time required by the process  
+- **Priority** – Lower value indicates higher priority  
+- **Time Quantum** – Applicable only for Round Robin scheduling  
 
-Priority – Lower value means higher priority
+---
 
-Time Quantum (only for Round Robin)
 
-📊 Performance Metrics
+---
 
-Turnaround Time (TAT)
+## 🔹 Algorithm Explanations
 
-TAT = Completion Time − Arrival Time
+---
 
+## 1️⃣ First Come First Serve (FCFS)
 
-Waiting Time (WT)
+### Description
+FCFS is the simplest CPU scheduling algorithm.  
+Processes are executed strictly in the order of their arrival.
 
-WT = Turnaround Time − Burst Time
+### Characteristics
+- Non-preemptive  
+- Simple to implement  
+- Can cause convoy effect  
+- Poor average waiting time for mixed workloads  
 
-🔹 Algorithm Explanations
-1️⃣ First Come First Serve (FCFS)
-Description
+### Working Principle
+- CPU is allocated to the process that arrives first  
+- Execution continues until the process completes  
 
-FCFS is the simplest CPU scheduling algorithm.
-Processes are executed in the order of their arrival.
+### Advantages
+- Easy to implement  
+- No starvation  
 
-Characteristics
+### Disadvantages
+- High waiting time  
+- Not suitable for time-sharing systems  
 
-Non-preemptive
+---
 
-Simple to implement
+## 2️⃣ Shortest Job First (SJF) – Non-Preemptive
 
-Can cause convoy effect
+### Description
+SJF selects the process with the smallest burst time among all available processes.
 
-Poor average waiting time for mixed workloads
+### Characteristics
+- Non-preemptive  
+- Optimal for minimizing average waiting time  
+- Requires burst time prediction  
 
-Working Principle
+### Working Principle
+- At each scheduling decision, the shortest available job is selected  
+- Once selected, the process runs until completion  
 
-CPU is allocated to the process that arrives first
+### Advantages
+- Minimum average waiting time  
+- Efficient for batch systems  
 
-Execution continues until completion
+### Disadvantages
+- Starvation possible for long processes  
+- Accurate burst time estimation required  
 
-Advantages
+---
 
-Easy implementation
+## 3️⃣ Priority Scheduling – Non-Preemptive
 
-No starvation
+### Description
+Each process is assigned a priority.  
+The CPU is allocated to the process with the highest priority (lowest priority number).
 
-Disadvantages
+### Characteristics
+- Non-preemptive  
+- Priority-based decision making  
+- Can cause starvation  
 
-High waiting time
+### Working Principle
+- Among arrived processes, select the one with highest priority  
+- Execute the process until completion  
 
-Not suitable for time-sharing systems
+### Advantages
+- Important tasks can be prioritized  
+- Useful in real-time systems  
 
-2️⃣ Shortest Job First (SJF) – Non-Preemptive
-Description
+### Disadvantages
+- Starvation of low-priority processes  
+- Priority inversion problem (not handled)  
 
-SJF selects the process with the smallest burst time among the available processes.
+---
 
-Characteristics
+## 4️⃣ Round Robin (RR)
 
-Non-preemptive
+### Description
+Round Robin is a preemptive CPU scheduling algorithm designed for time-sharing systems.
 
-Optimal for minimizing average waiting time
+### Characteristics
+- Preemptive  
+- Uses time quantum  
+- Ensures fair CPU allocation  
+
+### Working Principle
+- Each process is assigned a fixed time quantum  
+- If the process does not complete, it is moved back to the ready queue  
+- The cycle continues until all processes finish execution  
+
+### Advantages
+- No starvation  
+- Suitable for interactive systems  
+
+### Disadvantages
+- Context switching overhead  
+- Performance depends on the size of the time quantum  
 
-Requires burst time prediction
-
-Working Principle
-
-At every decision point, choose the shortest job that has arrived
-
-Process runs to completion once selected
-
-Advantages
-
-Minimum average waiting time
-
-Efficient for batch systems
-
-Disadvantages
-
-Starvation possible for long processes
-
-Burst time estimation required
-
-3️⃣ Priority Scheduling (Non-Preemptive)
-Description
-
-Each process is assigned a priority.
-The CPU is allocated to the highest-priority process (lowest priority number).
-
-Characteristics
-
-Non-preemptive
-
-Priority-based decision making
-
-Can cause starvation
-
-Working Principle
-
-Among arrived processes, select the one with highest priority
-
-Execute until completion
-
-Advantages
-
-Important tasks can be prioritized
-
-Useful in real-time systems
-
-Disadvantages
-
-Starvation of low-priority processes
-
-Priority inversion problem (not handled here)
-
-4️⃣ Round Robin (RR)
-Description
-
-Round Robin is a preemptive scheduling algorithm designed for time-sharing systems.
-
-Characteristics
-
-Preemptive
-
-Uses time quantum
-
-Fair scheduling
-
-Working Principle
-
-Each process gets CPU for a fixed time quantum
-
-If not completed, it goes back to the ready queue
-
-Continues until all processes finish
-
-Advantages
-
-No starvation
-
-Suitable for interactive systems
-
-Disadvantages
-
-Context switching overhead
-
-Performance depends on time quantum size
-
-🖥️ Sample Menu Output
-CPU Scheduling Algorithms
-1. FCFS
-2. SJF (Non-Preemptive)
-3. Priority Scheduling
-4. Round Robin
-5. Exit
-Enter choice:
-
-🧪 Example Output Table
-PID   AT   BT   WT   TAT
-P1    0    5    0    5
-P2    1    3    4    7
-P3    2    8    6    14
-
-Average Waiting Time = 3.33
-Average Turnaround Time = 8.67
-
-🛠️ How to Compile and Run
-gcc cpu_scheduling.c -o cpu_scheduling
-./cpu_scheduling
